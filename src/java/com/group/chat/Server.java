@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 
 /**
@@ -44,28 +45,20 @@ public class Server extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnknownHostException, IOException {
-        System.out.println("server started ..");
-        DatagramSocket ss=new DatagramSocket(4000);
-        DatagramPacket pktSent=null;
-        DatagramPacket pktRcvd=null;
-        String recvdData=null;
-
-        while(true){
-            //receiving from client
-            byte[] byteArrayRecvd =new byte[1024];
-            pktRcvd=new DatagramPacket(byteArrayRecvd,byteArrayRecvd.length);
-            ss.receive(pktRcvd);
-            byteArrayRecvd=pktRcvd.getData();
-            recvdData=new String(byteArrayRecvd,0,pktRcvd.getLength(),"UTF-8");
-            System.out.println("recvdData data is .. "+recvdData);
-
-            //perform login operations and respond to client
-            byte[] byteArraySent =new byte[1024];
-//            String resp=login(recvdData);
-            String resp=recvdData;
-            byteArraySent=resp.getBytes();
-            pktSent=new DatagramPacket(byteArraySent,byteArraySent.length,pktRcvd.getAddress(),pktRcvd.getPort());
-            ss.send(pktSent);
+        try {
+            int port = 8888;
+            InetAddress group = InetAddress.getByName("230.0.0.1");
+            try (MulticastSocket socket = new MulticastSocket()) {
+                String message = "Hello Client!";
+                byte[] sendData = message.getBytes();
+                
+                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, group, port);
+                socket.send(sendPacket);
+                
+                System.out.println("Message sent to multicast group.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }	        
     }
 }

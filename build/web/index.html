@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Home</title>
+    
 </head>
 
 <body>
@@ -16,14 +17,12 @@
             <div class="header">
                 <img src="images/jojo.jpg" alt="">
                 <ul class="icons">
-                    <li><i class="fa fa-car"></i></li>
-                    <li><i class="fa fa-car"></i></li>
-                    <li><i class="fa fa-car"></i></li>
+                    
                     <li><i class="fa fa-ellipsis-v"></i></li>
                 </ul>
             </div>
             
-            <form action="./Client" method="GET">
+            <!--<form action="./Client" method="GET">-->
             <div class="search">
                 <div class="searchbar">
                     <i class="fa fa-search"></i>
@@ -37,7 +36,7 @@
                 </div>
                    
             </div>
-                </form>
+                <!--</form>-->
 
             <div class="chatlist">
                 <div class="chatbox">
@@ -277,7 +276,7 @@
             </div>
         </div>
 
-        <div class="right-chat-content">
+        <div class="right-chat-content" >
             <div class="header">
                 <div class="chatbox">
                     <img src="images/gp1.jpg" alt="">
@@ -295,16 +294,123 @@
                     <li><i class="fa fa-ellipsis-v"></i></li>
                 </ul>
             </div>
+            
             <div class="chat-content">
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
+                <div class="msg messages_mine">
+                    <p>hello babe</p>
+                </div>
+                <div class="msg messages_frnd">
+                    <p>hello roman, i miss you</p>
+                </div>
                 
             </div>
-            <div class="msgTypeArea">
-                
+            <form action="./Client" method="GET">
+            <div class="MsgsearchbarBottom">                
+                <input type="text" name="search" placeholder="Type your messages here and click the icon on the right to send"/>
+                <button type="submit"><i class="fa fa-paper-plane"></i></button>
             </div>
+            </form>
 
         </div>
     </div>
     <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
+    <script >
+        fetch("./client")
+        .then(
+            function(response){
+                if(response.status !== 200){
+                    console.log('something went wrong: ' + response.status);
+                    return;
+                }
+                response.json().then(
+                    function(data){
+                        console.log('data got is ....'+data);
+                    }
+                );
+            }
+        )
+        .catch(function(error){
+            console.log('fetch error'+error);
+        });
+    </script>
 </body>
 </html>

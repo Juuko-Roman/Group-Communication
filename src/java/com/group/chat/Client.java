@@ -12,9 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.UnknownHostException;
+import org.apache.tomcat.util.json.JSONParser;
 
 /**
  *
@@ -39,29 +40,34 @@ public class Client extends HttpServlet {
     }// </editor-fold>
 
      private void processRequest(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnknownHostException, IOException {
-        String recvd =null;
-        DatagramSocket ss=new DatagramSocket();
-        DatagramPacket pktSent=null;
-        DatagramPacket pktRcvd=null;
-        System.out.println("client ready");
-
-        
-        byte[] byteArray =new byte[1024];
         final PrintWriter out = response.getWriter();
+         try {
+            int port = 8888;
+            InetAddress group = InetAddress.getByName("230.0.0.1");
+            MulticastSocket socket = new MulticastSocket(port);
+            socket.joinGroup(group);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
 
-        //sending to server asking for allow login
-        String msg=request.getParameter("search");
-        byteArray=msg.getBytes();
-        pktSent=new DatagramPacket(byteArray,msg.length(), InetAddress.getByName("localhost"),4000);
-        ss.send(pktSent);
+//            while(true){
+                byte[] receiveData = new byte[1024];
+                DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-        //receiving response from server about allow login
-        byte[] byteArrayRecvd =new byte[1024];
-        pktRcvd=new DatagramPacket(byteArrayRecvd,byteArrayRecvd.length);
-        ss.receive(pktRcvd);
-        byteArrayRecvd=pktRcvd.getData();
-        recvd=new String(byteArrayRecvd,0,pktRcvd.getLength(),"UTF-8");
-        out.print("<h1>"+recvd+"</h1>");
+                socket.receive(receivePacket);
+
+                String receivedMessage = new String(receivePacket.getData(), 0, receivePacket.getLength());
+    //            System.out.println("Received message from server: " + receivedMessage);
+//                out.print("<h1>Received message from server: " + receivedMessage+"</h1>");
+                   JSONParser parser=new JSONParser("{'name':'roman'}");
+                   out.print(parser.parseObject());
+//            }
+
+//            socket.leaveGroup(group);
+//            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         // socket.close();

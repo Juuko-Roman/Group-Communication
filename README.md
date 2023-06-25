@@ -1,2 +1,2 @@
 # Group-Communication
-java program using sockets in web to achieve group communication
+java program using websockets in web to achieve group communication

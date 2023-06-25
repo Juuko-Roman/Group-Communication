@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+   <title>Home</title>
+
+
+</head>
+
+<body>
+    <div class="UbackgroundPattern"></div> 
+    <div class="LbackgroundPattern"></div>   
+    <div class="main-container">
+        <div class="left-chatgps">
+            <div class="header">
+                <h3 style="text-align: center; width: 100%">SAVE THE SEMESTER</h3>
+            </div>
+
+            <form id="usernameForm">
+            <div class="search">
+                <div class="searchbar">
+                    <input id="name" type="text" name="search" placeholder="Enter your name here"/>
+                </div>
+                <div class="searchbar">
+                    <select id="userTopic">
+                        <option value="none">-- Select the group you want to join --</option>
+                        <option value="public">Distributed Systems</option>
+                        <option value="football">Computer Networks</option>
+                    </select>
+                </div>
+                
+                <div class="connectionButtons">
+                    <div class="filter">
+                        <button id="connect" type="submit">
+                            Join Group
+                        </button >
+                    </div>
+                    <div class="filter">
+                        <button id="disconnect"  type="button">
+                            Leave Group
+                        </button >
+                    </div>
+                </div>
+                   
+            </div>
+            </form>
+            <div style="margin: 40px 0px 10px 60px">Available groups</div>
+            <div class="chatlist">
+                <div class="chatbox">
+                    <div class="img" style="background-color: greenyellow">D</div>
+                    <div class="chatContent">
+                        <div class="rowUpper">
+                            <div class="title">Distributed systems</div>
+                        </div>
+                        <div class="rowLower">
+                            <div class="message">Break down any complex ideas in distributed systems </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatbox">
+                    <div class="img" style="background-color: orange">C</div>
+                    <div class="chatContent">
+                        <div class="rowUpper">
+                            <div class="title">Computer networks</div>
+                        </div>
+                        <div class="rowLower">
+                            <div class="message">Full understanding of computer networks </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-info" id="group-info">
+                    <h2 style="margin-bottom: 20px">Group Members</h2>
+                    <ul  id="gpMembers">
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="right-chat-content" >
+            <div class="header">
+                <div class="chatbox">
+                    <div id="gpAbbvn" class="img" style="background-color: greenyellow"></div>
+                    <div class="chatContent">
+                        <div class="rowUpper">
+                            <div class="title" id="gptitle"></div>
+                        </div>
+                        <div class="rowLower">
+                            <div class="message" id="gpDescp"></div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="icons">
+                    <li><i class="fa fa-search"></i></li>
+                    <li><i class="fa fa-ellipsis-v"></i></li>
+                </ul>
+            </div>
+            
+            <div class="chat-content" id="conversation">
+
+
+            </div>
+            <form  id="messageForm">
+            <div class="MsgsearchbarBottom">                
+                <input type="text" id="message" name="search" placeholder="Type your messages here and click the icon on the right to send"/>
+                <button id="send" type="submit"><i class="fa fa-paper-plane"></i></button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="./js/sockjs.min.js"></script>
+    <script src="./js/stomp.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

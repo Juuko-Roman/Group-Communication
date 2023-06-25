@@ -11,28 +11,28 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
 
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
+    @SendTo("/topic/distributed")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
+    @SendTo("/topic/distributed")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket session
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
-    @MessageMapping("/chat.sendFootballMessage")
-    @SendTo("/group/football")
-    public ChatMessage sendFootballMessage(@Payload ChatMessage chatMessage) {
+    @MessageMapping("/chat.sendNetworksMessage")
+    @SendTo("/group/networks")
+    public ChatMessage sendNetworksMessage(@Payload ChatMessage chatMessage) {
         return chatMessage;
     }
 
-    @MessageMapping("/chat.addFootball")
-    @SendTo("/group/football")
-    public ChatMessage addFootball(@Payload ChatMessage chatMessage,
+    @MessageMapping("/chat.addNetworks")
+    @SendTo("/group/networks")
+    public ChatMessage addNetwork(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket session
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());

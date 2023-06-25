@@ -10,6 +10,7 @@ var groupInfo=document.querySelector("#group-info");
 var gptitle=document.querySelector("#gptitle");
 var gpDescp=document.querySelector("#gpDescp");
 var gpAbbvn=document.querySelector("#gpAbbvn");
+var mask=document.querySelector("#mask");
 
 
 // Select the buttons
@@ -58,16 +59,17 @@ function  disconnect(){
         disconnectButton.disabled = true;
         connectButton.style.backgroundColor='#008CBA';
         disconnectButton.style.backgroundColor='rgba(244, 67, 54, 0.5)';
+        mask.style.display="flex";
 
     }
 }
 
 
 function onConnected() {
-    // Subscribe to the Public Topic
+    // Subscribe to the distributed Topic
 
     // Tell your username to the server
-    if(userTopic==='public'){
+    if(userTopic==='distributed'){
         stompClient.subscribe('/topic/'+userTopic, onMessageReceived);
         stompClient.send("/app/chat.addUser",
             {},
@@ -77,10 +79,12 @@ function onConnected() {
         gptitle.innerHTML="Distributed Sytems";
         gpDescp.innerHTML="Break down any complex ideas in distributed systems ";
         gpAbbvn.innerHTML="D";
+        gpAbbvn.style.backgroundColor="greenYellow";
+        mask.style.display="none";
     }
-    if(userTopic==='football'){
+    if(userTopic==='networks'){
         stompClient.subscribe('/group/'+userTopic, onMessageReceived);
-        stompClient.send("/app/chat.addFootball",
+        stompClient.send("/app/chat.addNetworks",
             {},
             JSON.stringify({sender: username, type: 'JOIN'})
         )
@@ -88,7 +92,9 @@ function onConnected() {
         // connectingElement.classList.add('hidden');
         gptitle.innerHTML="Computer Networks";
         gpDescp.innerHTML="Full understanding of computer networks ";
-        gpAbbvn.innerHTML="C"
+        gpAbbvn.innerHTML="C";
+        gpAbbvn.style.backgroundColor="orange";
+        mask.style.display="none";
         // connectingElement.classList.add('hidden');
     }
 
@@ -110,14 +116,14 @@ function sendMessage(event) {
             content: messageContent,
             type: 'CHAT'
         };
-        if(userTopic==='public'){
+        if(userTopic==='distributed'){
             stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
             messageInput.value = '';
         }
-        // if(userTopic==='football'){
-        //     stompClient.send("/app/chat.sendFootballMessage", {}, JSON.stringify(chatMessage));
-        //     messageInput.value = '';
-        // }
+        if(userTopic==='networks'){
+            stompClient.send("/app/chat.sendNetworksMessage", {}, JSON.stringify(chatMessage));
+            // messageInput.value = '';
+        }
     }
     event.preventDefault();
 }

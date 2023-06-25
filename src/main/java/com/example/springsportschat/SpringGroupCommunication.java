@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSportsChatApplication {
+public class SpringGroupCommunication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSportsChatApplication.class, args);
+        SpringApplication.run(SpringGroupCommunication.class, args);
     }
 
 }

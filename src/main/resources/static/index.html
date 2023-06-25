@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/styles.css">
    <title>Home</title>
-
-
 </head>
 
 <body>
@@ -28,8 +26,8 @@
                 <div class="searchbar">
                     <select id="userTopic">
                         <option value="none">-- Select the group you want to join --</option>
-                        <option value="public">Distributed Systems</option>
-                        <option value="football">Computer Networks</option>
+                        <option value="distributed">Distributed Systems</option>
+                        <option value="networks">Computer Networks</option>
                     </select>
                 </div>
                 
@@ -84,6 +82,10 @@
 
 
         <div class="right-chat-content" >
+            <div class="mask" id="mask">
+                <p>You need to first choose a group and join it </p>
+                <p>to see messages that appear in this section</p>
+            </div>
             <div class="header">
                 <div class="chatbox">
                     <div id="gpAbbvn" class="img" style="background-color: greenyellow"></div>

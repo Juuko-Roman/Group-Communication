@@ -1,7 +1,6 @@
 'use strict';
 
-// var usernamePage = document.querySelector('#username-page');
-// var chatPage = document.querySelector('#chat-page');
+
 var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
@@ -23,26 +22,20 @@ disconnectButton.style.backgroundColor='rgba(244, 67, 54, 0.5)';
 
 
 groupInfo.style.display="none";
-// var messageArea = document.querySelector('#messageArea');
+
 // var connectingElement = document.querySelector('.connecting');
-//
+
 var connectClick=document.querySelector("#connect");
 var stompClient = null;
 var username = null;
 var userTopic =null;
-//
-// var colors = [
-//     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
-//     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
-// ];
+
 
 function connect(event) {
     event.preventDefault();
     username = document.querySelector('#name').value.trim();
     userTopic=document.querySelector('#userTopic').value.trim();
     if(username) {
-    //     usernamePage.classList.add('hidden');
-    //     chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
@@ -76,7 +69,7 @@ function onConnected() {
             JSON.stringify({sender: username, type: 'JOIN'})
         )
         // connectingElement.classList.add('hidden');
-        gptitle.innerHTML="Distributed Sytems";
+        gptitle.innerHTML="Distributed Systems";
         gpDescp.innerHTML="Break down any complex ideas in distributed systems ";
         gpAbbvn.innerHTML="D";
         gpAbbvn.style.backgroundColor="greenYellow";
@@ -127,14 +120,13 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
-//
-//
+
+
 function onMessageReceived(payload) {
 
     var message = JSON.parse(payload.body);
     console.log("message received from "+message.sender);
 
-//     var messageElement = document.createElement('li');
 
     if(message.type === 'JOIN') {
 
@@ -143,9 +135,9 @@ function onMessageReceived(payload) {
         disconnectButton.disabled = false;
         connectButton.style.backgroundColor='rgba(0, 140, 186, 0.2)';
         disconnectButton.style.backgroundColor='#f44336';
-        // messageElement.classList.add('event-message');
-        // message.content = message.sender + ' joined!';
+
         console.log("new participant joined");
+
         // Create a new <li> element
         const newListItem = document.createElement('li');
 
@@ -165,8 +157,7 @@ function onMessageReceived(payload) {
 
     }
     else if (message.type === 'LEAVE') {
-        // messageElement.classList.add('event-message');
-        // message.content = message.sender + ' left!';
+
         console.log("participant left");
         // Create a new <li> element
         const newListItem = document.createElement('li');
@@ -207,14 +198,14 @@ function onMessageReceived(payload) {
         var messageParagraph = document.createElement('p');
         messageParagraph.textContent = message.content;
 
-// Append the <p> elements to the new <div> element
+    // Append the <p> elements to the new <div> element
         newDiv.appendChild(youParagraph);
         newDiv.appendChild(messageParagraph);
 
-// Get the outermost <div> element with class "chat-content"
+    // Get the outermost <div> element with class "chat-content"
         var conversationDiv = document.getElementById('conversation');
 
-// Append the new <div> element to the outermost <div>
+    // Append the new <div> element to the outermost <div>
         conversationDiv.appendChild(newDiv);
         conversationDiv.scrollTop = conversationDiv.scrollHeight;
     }
